@@ -21,17 +21,44 @@ namespace PuntoDeVenta
             {"5","Hamburguesa","110" }
         };
 
+        private void total()
+        {
+            float total = 0.0f;
+            for(int i = 0; i< dataGridView1.Rows.Count; i++)
+            {
+                total += float.Parse(dataGridView1[3, i].Value.ToString());
+
+            }
+            label3.Text = "Total = " + total;
+            textBox1.Clear();
+            textBox1.Focus();
+        }
+
         private void buscarProductos()
         {
-            
-            for(int i =0; i < 5; i++)
+            if (textBox1.Text.IndexOf('*') != -1)
             {
-                if (textBox1.Text == productos[i,0])
+                String[] sarray = textBox1.Text.Split('*');
+                for (int i = 0; i < productos.GetUpperBound(0)+1; i++)
                 {
-                    dataGridView1.Rows.Add("1", productos[i,1]);
+                    if (sarray[1] == productos[i, 0])
+                    {
+                        dataGridView1.Rows.Add(productos[i,2], productos[i, 1], sarray[0], float.Parse(productos[i, 2]) * float.Parse(sarray[0]));
+                        total();
+                    }
                 }
             }
-
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    if (textBox1.Text == productos[i, 0])
+                    {
+                        dataGridView1.Rows.Add(productos[i,2], productos[i, 1],"1",productos[i, 2]);
+                        total();
+                    }
+                }
+            }
         }
         public Form1()
         {
@@ -51,6 +78,8 @@ namespace PuntoDeVenta
             dataGridView1.Location = new Point(10, label2.Height + label1.Height + 25);
             textBox1.Width = this.Width;
             textBox1.Location = new Point(0, this.Height - textBox1.Height);
+            label3.Text = "Total =";
+            label3.Location = new Point(this.Width-dataGridView1.Columns[3].Width, label1.Height + label2.Height + dataGridView1.Height + 35);
 
         }
 
@@ -59,6 +88,15 @@ namespace PuntoDeVenta
             if (e.KeyCode == Keys.Enter)
             {
                 buscarProductos();
+            }
+            if(e.KeyCode  == Keys.Escape)
+            {
+                dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 1);
+
+            }
+            if (e.KeyCode == Keys.P)
+            {
+                MessageBox.Show("Vas a pagar");
             }
         }
     }
