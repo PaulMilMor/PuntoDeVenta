@@ -177,23 +177,32 @@ namespace PuntoDeVenta
             {
                 float subtotal = total() / (float)1.16;
                 float iva = total() - subtotal;
-                DialogResult dialogResult = MessageBox.Show("¿Listo para pagar?", "Pagar", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                if (vendidos.Count >= 1)
                 {
-                    var ticket = new Input(subtotal,iva,total());
-                    ticket.Shown += (o, args) => { this.Enabled = false; };
-                    ticket.FormClosed += (o, args) => { this.Enabled = true; };
-                    ticket.Show();
-                    dataGridView1.Rows.Clear();
-                    vendidos.RemoveRange(0, vendidos.Count);
-                    label3.Text = "Total = ";
-                    
-                    
+                    DialogResult dialogResult = MessageBox.Show("¿Listo para pagar?", "Pagar", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        var ticket = new Input(subtotal, iva, total());
+                        ticket.Shown += (o, args) => { this.Enabled = false; };
+                        ticket.FormClosed += (o, args) => { this.Enabled = true; };
+                        ticket.Show();
+                        dataGridView1.Rows.Clear();
+                        vendidos.RemoveRange(0, vendidos.Count);
+                        label3.Text = "Total = ";
+
+
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        textBox1.Clear();
+                    }
                 }
-                else if (dialogResult == DialogResult.No)
+                else
                 {
-                    textBox1.Clear();
+                    MessageBox.Show("No puede pagar si no se ha vendido nada");
+                    textBox1.Focus();
                 }
+               
                 //MessageBox.Show("Vas a pagar");
                 //textBox1.Text = String.Empty;
             }
