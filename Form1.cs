@@ -118,6 +118,7 @@ namespace PuntoDeVenta
         public Form1()
         {
             InitializeComponent();
+           
             this.ActiveControl = textBox1;
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
             c = new Conexion();
@@ -138,6 +139,8 @@ namespace PuntoDeVenta
 
             label3.Location = new Point(this.Width *3/4, label1.Height + label2.Height + dataGridView1.Height + 35);
             label4.Location = new Point((this.Width * 3 / 4), label1.Height + 10);
+            label5.Location = new Point(10, this.Height - textBox1.Height - label5.Height - 20);
+            label5.Text = "Presione \"h\" para abrir el menú de ayuda";
         }
 
         
@@ -157,6 +160,14 @@ namespace PuntoDeVenta
                 buscarProductos();
                 textBox1.Text = String.Empty;
             }
+            if(e.KeyCode == Keys.H)
+            {
+                var help = new help();
+                help.Shown += (o, args) => { this.Enabled = false; };
+                help.FormClosed += (o, args) => { this.Enabled = true; };
+                help.Show();
+                textBox1.Clear();
+            }
             if(e.KeyCode  == Keys.Escape)
             {
                 if (dataGridView1.Rows.Count >= 1)
@@ -173,6 +184,36 @@ namespace PuntoDeVenta
 
 
             }
+            //Aqui empieza lo adicional
+            /*if(e.KeyCode == Keys.B)
+            {
+                if(dataGridView1.Rows.Count == 0)
+                {
+                    MessageBox.Show("No hay productos marcados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    textBox1.Clear();
+                }
+                else
+                {
+                    if(dataGridView1.CurrentCell.Selected == false)
+                    {
+                        MessageBox.Show("Seleccione un producto para eliminar", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        textBox1.Clear();
+                    }
+                    else
+                    {
+                        dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
+                        textBox1.Focus();
+                        dataGridView1.ClearSelection();
+                        textBox1.Clear();
+                        textBox1.Text = "giugui";
+
+                    }
+
+                }
+                textBox1.Clear();
+
+            }*/
+            //Aqui termina
             if (e.KeyCode == Keys.P)
             {
                 float subtotal = total() / (float)1.16;
