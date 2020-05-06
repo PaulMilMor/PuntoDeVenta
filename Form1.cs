@@ -121,8 +121,11 @@ namespace PuntoDeVenta
            
             this.ActiveControl = textBox1;
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
+            Console.WriteLine("Before Connection");
             c = new Conexion();
+            Console.WriteLine("After connection");
             productos = c.getProductos();
+            Console.WriteLine("After getProductos");
             vendidos = new List<Producto>();
             for (int i = 0; i < productos.Count; i++)
             {
