@@ -53,8 +53,27 @@ namespace PuntoDeVenta
             {   
                 if(regresar.Text == "0.00")
                 {
-                    float reccash = float.Parse(pagado.Text);
-                    regresar.Text = "$" + (reccash - float.Parse(total.Text));
+                    if (string.IsNullOrWhiteSpace(pagado.Text))
+                    {
+                        error.Visible = true;
+                    }
+                    else
+                    {
+                        float reccash = float.Parse(pagado.Text);
+                        if (reccash < float.Parse(total.Text))
+                        {
+                            error.Visible = true;
+                        }
+                        else
+                        {
+
+                            regresar.Text = "$" + (reccash - float.Parse(total.Text));
+                            placeholder.Text = "Presione Enter para cerrar.";
+                            error.Visible = false;
+
+                        }
+                    }
+                    
                 }
                 else
                 {

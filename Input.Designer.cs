@@ -43,6 +43,8 @@
             this.pagado = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.regresar = new System.Windows.Forms.Label();
+            this.placeholder = new System.Windows.Forms.Label();
+            this.error = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -151,10 +153,10 @@
             // 
             // pagado
             // 
-            this.pagado.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pagado.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pagado.Location = new System.Drawing.Point(223, 386);
             this.pagado.Name = "pagado";
-            this.pagado.Size = new System.Drawing.Size(138, 24);
+            this.pagado.Size = new System.Drawing.Size(138, 27);
             this.pagado.TabIndex = 10;
             this.pagado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.pagado.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Pagado_KeyDown);
@@ -180,12 +182,36 @@
             this.regresar.TabIndex = 12;
             this.regresar.Text = "0.00";
             // 
+            // placeholder
+            // 
+            this.placeholder.AutoSize = true;
+            this.placeholder.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.placeholder.Location = new System.Drawing.Point(30, 499);
+            this.placeholder.Name = "placeholder";
+            this.placeholder.Size = new System.Drawing.Size(308, 17);
+            this.placeholder.TabIndex = 13;
+            this.placeholder.Text = "Presione Enter para confirmar.";
+            // 
+            // error
+            // 
+            this.error.AutoSize = true;
+            this.error.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.error.ForeColor = System.Drawing.Color.Red;
+            this.error.Location = new System.Drawing.Point(30, 416);
+            this.error.Name = "error";
+            this.error.Size = new System.Drawing.Size(178, 17);
+            this.error.TabIndex = 14;
+            this.error.Text = "Cantidad inválida";
+            this.error.Visible = false;
+            // 
             // Input
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(384, 749);
+            this.Controls.Add(this.error);
+            this.Controls.Add(this.placeholder);
             this.Controls.Add(this.regresar);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.pagado);
@@ -224,5 +250,7 @@
         private System.Windows.Forms.TextBox pagado;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label regresar;
+        private System.Windows.Forms.Label placeholder;
+        private System.Windows.Forms.Label error;
     }
 }
